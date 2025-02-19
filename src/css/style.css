@@ -10,21 +10,115 @@
     --pale-purple: #8B6990;
     --pink: #AD28EB;
     --light-pink: #F8EEFF;
-  }
 
-  body {
-    font-family: 'Work Sans';
+    @utopia spaceScale({
+      minSize: 16,
+      maxSize: 16,
+      positiveSteps: [1.25, 1.5, 2, 2.5],
+      negativeSteps: [],
+      customSizes: ["l-2xl"],
+      prefix: "space",
+      relativeTo: "viewport-width",
+    });
+
+  interpolate-size: allow-keywords;
+}
+
+body {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  padding-inline: var(--space-l);
+  font-family: 'Work Sans';
+  color: var(--pale-purple);
+
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: var(--light-pink);
+  background-image: url(/background-pattern-desktop.svg);
+
+  @media (max-width: 600px) {
+    background-image: url(/background-pattern-mobile.svg);
   }
 }
 
-@layer utilities {
-  .txt-display {
-    font-size: 3.5rem;
-    font-weight: 700;
+h1 {
+  font-size: utopia.clamp(32, 50);
+  font-weight: 700;
+  color: var(--dark-purple);
+}
+
+details {
+  font-size: utopia.clamp(14, 16);
+  padding-block: var(--space-m-l);
+
+  &:first-of-type {
+    padding-block-start: 0;
   }
 
-  .txt-title {
-    font-size: 1.125rem;
-    font-weight: 600;
+  &:last-of-type {
+    padding-block-end: 0;
+  }
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid var(--light-pink);
   }
 }
+
+summary {
+  list-style: none;
+  font-size: utopia.clamp(16, 18);
+  font-weight: 600;
+  color: var(--dark-purple);
+  display: flex;
+  gap: var(--space-l);
+  justify-content: space-between;
+  align-items: center;
+
+  &:hover,
+  &:focus-visible {
+    cursor: pointer;
+    color: var(--pink);
+  }
+
+  details[open]>& {
+    margin-block-end: var(--space-l);
+  }
+
+  &::after {
+    content: url('/icon-plus.svg');
+    height: 30px;
+  }
+
+  details[open]>&::after {
+    content: url('/icon-minus.svg');
+  }
+}
+}
+
+@layer composition {
+  .with-icon {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-l, 1rem);
+
+    &>.icon {
+      width: 1cap;
+      height: 1cap;
+    }
+  }
+}
+
+@layer blocks {
+  .card {
+    max-width: 37.5rem;
+    background-color: var(--white);
+    border-radius: var(--space-s);
+    padding: var(--space-l-2xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-l-xl);
+  }
+}
+
+@layer utilities {}
