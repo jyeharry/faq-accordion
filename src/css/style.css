@@ -51,6 +51,7 @@ h1 {
 details {
   font-size: utopia.clamp(14, 16);
   padding-block: var(--space-m-l);
+  overflow: hidden;
 
   &:first-of-type {
     padding-block-start: 0;
@@ -62,6 +63,16 @@ details {
 
   &:not(:last-of-type) {
     border-bottom: 1px solid var(--light-pink);
+  }
+
+  &::details-content {
+    block-size: 0;
+    transition: block-size 0.2s, content-visibilty 0.2s;
+    transition-behavior: allow-discrete;
+  }
+
+  &[open]::details-content {
+    block-size: auto;
   }
 }
 
