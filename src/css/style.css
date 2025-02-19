@@ -1,0 +1,30 @@
+@layer reset, globals, composition, blocks, utilities;
+
+@import "./reset.css" layer(reset);
+@import "./fonts.css" layer(globals);
+
+@layer globals {
+  :root {
+    --white: #ffffff;
+    --dark-purple: #301534;
+    --pale-purple: #8B6990;
+    --pink: #AD28EB;
+    --light-pink: #F8EEFF;
+  }
+
+  body {
+    font-family: 'Work Sans';
+  }
+}
+
+@layer utilities {
+  .txt-display {
+    font-size: 3.5rem;
+    font-weight: 700;
+  }
+
+  .txt-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+}
